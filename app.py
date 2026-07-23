@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Style CSS personnalisé pour un look "App Mobile" moderne et léché
+# Style CSS personnalisé pour un look "App Mobile" moderne et professionnel
 st.markdown("""
     <style>
     .main {
@@ -17,7 +17,7 @@ st.markdown("""
     }
     /* Bannière d'en-tête avec image de fond */
     .hero-banner {
-        background: linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.78)), 
+        background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
                     url('https://images.unsplash.com/photo-1509391365360-e835f377e169?q=80&w=1200&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
@@ -76,12 +76,12 @@ st.markdown("""
     }
     .card-eq {
         background-color: white;
-        padding: 12px;
+        padding: 10px;
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         text-align: center;
-        margin-bottom: 10px;
-        border-top: 3px solid #f97316;
+        margin-bottom: 12px;
+        border-top: 3px solid #1d4ed8;
     }
     .news-card {
         background-color: white;
@@ -89,7 +89,7 @@ st.markdown("""
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         margin-bottom: 12px;
-        border-left: 4px solid #1d4ed8;
+        border-left: 4px solid #f97316;
         font-size: 13px;
     }
     </style>
@@ -103,46 +103,46 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Navigation par onglets élargie
+# Navigation par onglets
 tab0, tab1, tab2 = st.tabs(["🏠 Accueil & Actus", "⚡ Calculateur", "📜 Normes & Sécurité"])
 
 with tab0:
-    st.markdown("### 🌐 Équipements Solaire 3D & Matériel Pro")
-    st.markdown("<small>Aperçu des composants de pointe utilisés pour vos installations sur le terrain :</small>", unsafe_allow_html=True)
+    st.markdown("### 🛠️ Matériel & Équipements Professionnels")
+    st.markdown("<small>Aperçu des composants de référence pour vos projets photovoltaïques :</small>", unsafe_allow_html=True)
 
-    # Grille visuelle des équipements avec de vraies images de haute qualité
+    # Grille visuelle des équipements avec des photos professionnelles épurées
     col_e1, col_e2 = st.columns(2)
     with col_e1:
         st.markdown("""
             <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Panneaux Monocristallins</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Rendement élevé & Technologie PERC / Bifaciale</p>
+                <img src="https://images.unsplash.com/photo-1592833159155-c62ff1b62490?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Modules Photovoltaïques</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Technologie monocristalline haute efficacité</p>
             </div>
         """, unsafe_allow_html=True)
         
         st.markdown("""
             <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Batteries Lithium LiFePO4</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Durabilité accrue, BMS intégré & haute profondeur de décharge</p>
+                <img src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Stockage Lithium Avancé</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">BMS intégré & durée de vie optimisée</p>
             </div>
         """, unsafe_allow_html=True)
 
     with col_e2:
         st.markdown("""
             <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1624397640307-ebdce12484f1?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Onduleurs Hybrides / MPPT</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Gestion intelligente réseau, solaire et stockage batterie</p>
+                <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Onduleurs & Régulateurs</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Conversion haute performance & gestion de charge</p>
             </div>
         """, unsafe_allow_html=True)
 
         st.markdown("""
             <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Structure & Protections DC</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Coffrets de protection, parafoudres et fixations robustes</p>
+                <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Protections & Câblage DC</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Coffrets de coupure et mise en conformité</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -320,4 +320,3 @@ with tab2:
 
 st.markdown("---")
 st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 12px;'>SolairePro - Conçu pour les ingénieurs et installateurs terrain</p>", unsafe_allow_html=True)
-        
