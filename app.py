@@ -1,4 +1,4 @@
-import streamlit as st
+ import streamlit as st
 import pandas as pd
 
 # Configuration de la page pour un affichage optimal sur smartphone
@@ -9,29 +9,39 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Style CSS personnalisé pour un look "App Mobile" moderne et visuel
+# Style CSS personnalisé avec bannière d'en-tête immersive
 st.markdown("""
     <style>
     .main {
         background-color: #f8f9fa;
     }
-    /* Style du titre avec dégradé Bleu et Orange */
+    /* Bannière d'en-tête avec image de fond et superposition élégante */
+    .hero-banner {
+        background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                    url('https://images.unsplash.com/photo-1509391365360-e835f377e169?q=80&w=1200&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        padding: 35px 20px;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    /* Titre stylisé en dégradé bleu et orange éclatant sur fond sombre */
     .app-title {
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 32px;
+        font-size: 36px;
         font-weight: 800;
-        text-align: center;
-        background: linear-gradient(90deg, #1d4ed8 0%, #f97316 100%);
+        background: linear-gradient(90deg, #60a5fa 0%, #fb923c 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 0px;
+        margin-bottom: 5px;
     }
     .app-subtitle {
-        text-align: center;
-        color: #64748b;
+        color: #e2e8f0;
         font-size: 14px;
-        margin-top: 5px;
-        margin-bottom: 20px;
+        font-weight: 400;
+        margin: 0;
     }
     .stButton>button {
         width: 100%;
@@ -68,10 +78,13 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# En-tête stylisé
-st.markdown('<div class="app-title">☀️ SolairePro</div>', unsafe_allow_html=True)
-st.markdown('<div class="app-subtitle">Dimensionnement intelligent & Conformité technique</div>', unsafe_allow_html=True)
-st.markdown("---")
+# En-tête avec bannière visuelle moderne
+st.markdown("""
+    <div class="hero-banner">
+        <div class="app-title">☀️ SolairePro</div>
+        <div class="app-subtitle">Dimensionnement intelligent & Conformité technique pour installateurs</div>
+    </div>
+""", unsafe_allow_html=True)
 
 # Navigation par onglets
 tab1, tab2 = st.tabs(["⚡ Calculateur", "📜 Normes & Sécurité"])
@@ -81,7 +94,7 @@ with tab1:
     st.markdown("### 📋 Équipements électriques & Visuels")
     st.markdown("<small>Sélectionnez et ajustez les charges à intégrer dans le dimensionnement :</small>", unsafe_allow_html=True)
 
-    # Base de données enrichie avec des émojis illustratifs puissants
+    # Base de données enrichie avec des émojis illustratifs
     default_appliances = [
         {"nom": "Ampoule LED", "icone": "💡", "puissance": 10, "demarrage": 1.0, "quantite": 5, "heures": 5},
         {"nom": "Téléviseur LED", "icone": "📺", "puissance": 80, "demarrage": 1.0, "quantite": 1, "heures": 4},
@@ -137,7 +150,7 @@ with tab1:
     if st.button("🚀 LANCER LE DIMENSIONNEMENT TECHNIQUE"):
         
         conso_totale_wh = df["Énergie (Wh/j)"].sum()
-        conso_avec_pertes = conso_totale_wh * 1.20 # 20% de pertes globales (onduleur/câbles)
+        conso_avec_pertes = conso_totale_wh * 1.20 # 20% de pertes globales
 
         puissance_continue_max = (df["Puissance (W)"] * df["Quantité"]).sum()
         max_pic_appareil = (df["Puissance Pic (W)"]).max() if not df.empty else 0
@@ -227,4 +240,4 @@ with tab2:
 
 st.markdown("---")
 st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 12px;'>SolairePro - Conçu pour les ingénieurs et installateurs terrain</p>", unsafe_allow_html=True)
-    
+        
