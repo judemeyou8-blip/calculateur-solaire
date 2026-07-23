@@ -9,88 +9,137 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Style CSS personnalisé pour un look "App Mobile" moderne et professionnel
+# Style CSS personnalisé pour un look "App Mobile" moderne, inspiré des standards industriels actuels
 st.markdown("""
     <style>
     .main {
-        background-color: #f8f9fa;
+        background-color: #f8fafc;
     }
-    /* Bannière d'en-tête avec image de fond */
+    /* Bannière d'en-tête immersive */
     .hero-banner {
-        background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)), 
                     url('https://images.unsplash.com/photo-1509391365360-e835f377e169?q=80&w=1200&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
-        padding: 30px 15px;
-        border-radius: 15px;
+        padding: 35px 20px;
+        border-radius: 16px;
         text-align: center;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .app-title {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 32px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 30px;
         font-weight: 800;
-        background: linear-gradient(90deg, #60a5fa 0%, #fb923c 100%);
+        background: linear-gradient(90deg, #38bdf8 0%, #fb923c 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
+        letter-spacing: -0.5px;
     }
     .app-subtitle {
-        color: #e2e8f0;
+        color: #cbd5e1;
         font-size: 13px;
         font-weight: 400;
         margin: 0;
+        letter-spacing: 0.2px;
     }
     .stButton>button {
         width: 100%;
-        background-color: #f97316;
+        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
         color: white;
-        font-weight: bold;
-        border-radius: 10px;
-        height: 50px;
+        font-weight: 700;
+        border-radius: 12px;
+        height: 52px;
         border: none;
-        font-size: 16px;
+        font-size: 15px;
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        transition: all 0.3s ease;
     }
     .stButton>button:hover {
-        background-color: #ea580c;
-        color: white;
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+        box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
     }
     .metric-card {
         background-color: white;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        margin-bottom: 10px;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -2px rgba(0,0,0,0.02);
+        margin-bottom: 12px;
         text-align: center;
-        border-left: 4px solid #1d4ed8;
+        border-left: 4px solid #0284c7;
+        border: 1px solid #f1f5f9;
     }
     .norme-box {
-        background-color: #eff6ff;
-        padding: 12px;
-        border-radius: 8px;
-        border-left: 4px solid #3b82f6;
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #1e3a8a;
-    }
-    .card-eq {
-        background-color: white;
-        padding: 10px;
+        background-color: #f0f9ff;
+        padding: 14px;
         border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        text-align: center;
+        border-left: 4px solid #0284c7;
         margin-bottom: 12px;
-        border-top: 3px solid #1d4ed8;
+        font-size: 13.5px;
+        color: #0369a1;
+        border: 1px solid #e0f2fe;
+    }
+    /* Cartes équipements style E-commerce technique */
+    .catalog-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -1px rgba(0,0,0,0.02);
+        overflow: hidden;
+        margin-bottom: 16px;
+        border: 1px solid #e2e8f0;
+        transition: transform 0.2s ease;
+    }
+    .catalog-img-container {
+        position: relative;
+        width: 100%;
+        height: 120px;
+        overflow: hidden;
+        background-color: #f1f5f9;
+    }
+    .catalog-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .catalog-badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: rgba(15, 23, 42, 0.85);
+        color: #38bdf8;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 20px;
+        backdrop-filter: blur(4px);
+    }
+    .catalog-content {
+        padding: 12px;
+    }
+    .catalog-title {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 4px;
+    }
+    .catalog-desc {
+        font-size: 11.5px;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.4;
     }
     .news-card {
         background-color: white;
-        padding: 12px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        padding: 14px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
         margin-bottom: 12px;
         border-left: 4px solid #f97316;
+        border: 1px solid #f1f5f9;
         font-size: 13px;
+        color: #334155;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -99,90 +148,137 @@ st.markdown("""
 st.markdown("""
     <div class="hero-banner">
         <div class="app-title">☀️ SolairePro</div>
-        <div class="app-subtitle">L'assistant intelligent des ingénieurs et installateurs solaires</div>
+        <div class="app-subtitle">Plateforme d'ingénierie et de dimensionnement photovoltaïque</div>
     </div>
 """, unsafe_allow_html=True)
 
 # Navigation par onglets
-tab0, tab1, tab2 = st.tabs(["🏠 Accueil & Actus", "⚡ Calculateur", "📜 Normes & Sécurité"])
+tab0, tab1, tab2 = st.tabs(["🏠 Accueil & Équipements", "⚡ Calculateur", "📜 Normes & Sécurité"])
 
 with tab0:
-    st.markdown("### 🛠️ Matériel & Équipements Professionnels")
-    st.markdown("<small>Aperçu des composants de référence pour vos projets photovoltaïques :</small>", unsafe_allow_html=True)
+    st.markdown("### 🛠️ Catalogue & Équipements Modernes")
+    st.markdown("<small style='color: #64748b;'>Sélection de composants industriels et résidentiels de dernière génération :</small>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
 
-    # Grille visuelle des équipements avec des images ciblées et vérifiées
+    # Grille d'équipements sur 2 colonnes avec des visuels haut de gamme ciblés
     col_e1, col_e2 = st.columns(2)
+    
     with col_e1:
+        # 1. Panneau Solaire
         st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1509391365360-e835f377e169?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Modules Photovoltaïques</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Technologie monocristalline haute efficacité</p>
+            <div class="catalog-card">
+                <div class="catalog-img-container">
+                    <img src="https://images.unsplash.com/photo-1508817583692-057a6833c948?q=80&w=600&auto=format&fit=crop">
+                    <span class="catalog-badge">Tier 1</span>
+                </div>
+                <div class="catalog-content">
+                    <div class="catalog-title">Panneau Monocristallin</div>
+                    <p class="catalog-desc">Modules haute efficacité (>21%) à cellules 182mm/210mm demi-coupées.</p>
+                </div>
             </div>
         """, unsafe_allow_html=True)
         
+        # 2. Régulateur / Onduleur Hybride
         st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Stockage Lithium Avancé</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">BMS intégré & durée de vie optimisée</p>
+            <div class="catalog-card">
+                <div class="catalog-img-container">
+                    <img src="https://images.unsplash.com/photo-1624397640307-ebdce12484f1?q=80&w=600&auto=format&fit=crop">
+                    <span class="catalog-badge">MPPT</span>
+                </div>
+                <div class="catalog-content">
+                    <div class="catalog-title">Onduleur & Régulateur</div>
+                    <p class="catalog-desc">Conversion pure sinusoïde avec suivi MPPT ultra-rapide et Wi-Fi intégré.</p>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+
+        # 3. Téléviseur / Appareil Solaire CC
+        st.markdown("""
+            <div class="catalog-card">
+                <div class="catalog-img-container">
+                    <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=600&auto=format&fit=crop">
+                    <span class="catalog-badge">Basse Conso</span>
+                </div>
+                <div class="catalog-content">
+                    <div class="catalog-title">Équipements & Télé DC</div>
+                    <p class="catalog-desc">Appareils à haut rendement énergétique optimisés pour l'autoconsommation directe.</p>
+                </div>
             </div>
         """, unsafe_allow_html=True)
 
     with col_e2:
+        # 4. Stockage Lithium Avancé
         st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1624397640307-ebdce12484f1?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Onduleurs & Régulateurs</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Conversion haute performance & gestion de charge</p>
+            <div class="catalog-card">
+                <div class="catalog-img-container">
+                    <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=600&auto=format&fit=crop">
+                    <span class="catalog-badge">LiFePO4</span>
+                </div>
+                <div class="catalog-content">
+                    <div class="catalog-title">Batterie Lithium LiFePO4</div>
+                    <p class="catalog-desc">Stockage modulaire sécurisé, BMS intelligent et durée de vie > 6000 cycles.</p>
+                </div>
             </div>
         """, unsafe_allow_html=True)
 
+        # 5. Disjoncteur & Coffrets de Protection DC/AC
         st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Protections & Câblage DC</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Coffrets de coupure et mise en conformité</p>
+            <div class="catalog-card">
+                <div class="catalog-img-container">
+                    <img src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=600&auto=format&fit=crop">
+                    <span class="catalog-badge">Sécurité IP65</span>
+                </div>
+                <div class="catalog-content">
+                    <div class="catalog-title">Disjoncteurs & Coffrets DC</div>
+                    <p class="catalog-desc">Sectionneurs, parafoudres et protections modulaires conformes aux normes.</p>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+
+        # 6. Pompage Solaire / Accessoires
+        st.markdown("""
+            <div class="catalog-card">
+                <div class="catalog-img-container">
+                    <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=600&auto=format&fit=crop">
+                    <span class="catalog-badge">Pro</span>
+                </div>
+                <div class="catalog-content">
+                    <div class="catalog-title">Câblage & Accessoires</div>
+                    <p class="catalog-desc">Câbles solaires anti-UV H1Z2Z2-K et connecteurs étanches MC4 professionnels.</p>
+                </div>
             </div>
         """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.markdown("### 📰 Actualités & Tendances du Photovoltaïque")
+    st.markdown("### 📰 Actualités & Tendances du Solaire")
     
     st.markdown("""
         <div class="news-card">
             <b>🚀 Essor des onduleurs hybrides intelligents</b><br>
-            Les nouvelles gammes d'onduleurs intègrent des fonctionnalités de pilotage à distance via application mobile, permettant d'optimiser l'autoconsommation en temps réel et de basculer automatiquement sur le groupe électrogène ou le réseau en cas de besoin.
+            Les nouvelles gammes intègrent un pilotage cloud et mobile permettant d'ajuster dynamiquement la charge des batteries selon les prévisions météorologiques locales.
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
         <div class="news-card">
-            <b>🔋 Stockage Lithium : Baisse des coûts et performance</b><br>
-            La technologie Lithium-Fer-Phosphate (LiFePO4) s'impose définitivement sur le marché résidentiel et commercial grâce à sa durée de vie dépassant les 6 000 cycles et sa sécurité thermique renforcée par rapport au plomb.
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <div class="news-card">
-            <b>💡 Innovation dans les panneaux solaires bifaciaux</b><br>
-            L'utilisation de modules photovoltaïques captant la lumière sur les deux faces gagne du terrain dans les installations au sol et sur toitures terrasses, augmentant le rendement énergétique global de 10% à 25% selon l'albédo du site.
+            <b>🔋 Standardisation du LiFePO4 en résidentiel</b><br>
+            Les parcs de batteries au plomb cèdent définitivement la place aux racks lithium modulaires, garantissant une profondeur de décharge (DoD) de 80% à 90% sans perte de performance.
         </div>
     """, unsafe_allow_html=True)
 
 with tab1:
     # Étape 1 : Choix de la typologie des équipements
     st.markdown("### 📋 Équipements électriques & Charges")
-    st.markdown("<small>Sélectionnez et ajustez les appareils à intégrer dans le dimensionnement :</small>", unsafe_allow_html=True)
+    st.markdown("<small style='color: #64748b;'>Sélectionnez et ajustez les appareils à intégrer dans le dimensionnement :</small>", unsafe_allow_html=True)
 
     default_appliances = [
         {"nom": "Ampoule LED", "icone": "💡", "puissance": 10, "demarrage": 1.0, "quantite": 5, "heures": 5},
-        {"nom": "Téléviseur LED", "icone": "📺", "puissance": 80, "demarrage": 1.0, "quantite": 1, "heures": 4},
+        {"nom": "Téléviseur LED / Solaire", "icone": "📺", "puissance": 60, "demarrage": 1.0, "quantite": 1, "heures": 4},
         {"nom": "Réfrigérateur / Congélateur", "icone": "🧊", "puissance": 150, "demarrage": 3.0, "quantite": 1, "heures": 8},
         {"nom": "Ventilateur", "icone": "🌀", "puissance": 65, "demarrage": 1.5, "quantite": 2, "heures": 6},
         {"nom": "Routeur Wi-Fi / Box", "icone": "🛜", "puissance": 15, "demarrage": 1.0, "quantite": 1, "heures": 24},
         {"nom": "Pompe à eau (1/2 CV)", "icone": "💧", "puissance": 375, "demarrage": 4.0, "quantite": 0, "heures": 1},
-        {"nom": "Climatiseur (1 CV)", "icone": "❄️", "puissance": 1000, "demarrage": 3.5, "quantite": 0, "heures": 3},
+        {"nom": "Climatiseur Inverter", "icone": "❄️", "puissance": 900, "demarrage": 2.5, "quantite": 0, "heures": 3},
     ]
 
     user_data = []
@@ -281,40 +377,41 @@ with tab1:
 
 with tab2:
     st.markdown("### 📜 Normes & Bonnes Pratiques en Installation Solaire")
-    st.markdown("<small>Règles de l'art et conformité technique pour des installations sécurisées et durables.</small>", unsafe_allow_html=True)
+    st.markdown("<small style='color: #64748b;'>Règles de l'art et conformité technique pour des installations sécurisées et durables.</small>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
     
     st.markdown("""
         <div class="norme-box">
             <b>1. Protection et Section des Câbles (DC / AC)</b><br>
-            • Les câbles photovoltaïques (côté panneaux) doivent résister aux UV et aux intempéries (ex: câbles solaires type H1Z2Z2-K).<br>
-            • La chute de voltage entre les panneaux et le régulateur/onduleur ne doit pas dépasser <b>3%</b>.<br>
-            • Dimensionner les sections de câbles en fonction de l'intensité maximale (Ampères) pour éviter tout échauffement ou risque d'incendie.
+            • Utilisation impérative de câbles solaires spécifiques résistants aux UV (ex: H1Z2Z2-K).<br>
+            • Chute de tension maximale tolérée de <b>3%</b> entre les panneaux et le régulateur ou l'onduleur.<br>
+            • Dimensionnement des sections selon l'intensité maximale pour éliminer tout risque d'échauffement.
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
         <div class="norme-box">
             <b>2. Protections Électriques & Appareillage</b><br>
-            • <b>Côté DC (Continu) :</b> Installer obligatoirement un interrupteur-sectionneur DC et des fusibles ou disjoncteurs adaptés entre les panneaux et le régulateur/onduleur.<br>
-            • <b>Parafoudres :</b> Recommandé d'installer des parafoudres DC et AC pour protéger le matériel contre les surtensions dues à la foudre.<br>
-            • <b>Côté AC (Alternatif) :</b> Prévoir un tableau de protection divisionnaire avec disjoncteurs magnétothermiques et interrupteurs différentiels (30mA).
+            • <b>Côté DC :</b> Pose obligatoire d'un interrupteur-sectionneur et de fusibles ou disjoncteurs adaptés.<br>
+            • <b>Parafoudres :</b> Intégration de protections contre les surtensions transitoires (foudre) sur les lignes DC et AC.<br>
+            • <b>Côté AC :</b> Coffret de protection divisionnaire avec disjoncteurs magnétothermiques et différentiel 30mA.
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
         <div class="norme-box">
             <b>3. Mise à la Terre et Sécurité des Personnes</b><br>
-            • Relier les châssis métalliques des panneaux solaires, les supports et les masses des équipements à une prise de terre dédiée.<br>
-            • Résistance de terre conseillée : <b>inférieure à 10 ohms</b> pour garantir le déclenchement des protections en cas de défaut d'isolement.<br>
-            • Ne jamais manipuler les connexions DC sous charge en plein ensoleillement (risque d'arc électrique dangereux).
+            • Interconnexion équipotentielle des châssis de panneaux, des structures porteuses et des masses des équipements.<br>
+            • Résistance de prise de terre visée : <b>inférieure à 10 ohms</b>.<br>
+            • Consigne stricte : ne jamais débrancher un connecteur DC en charge sous rayonnement direct.
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
         <div class="norme-box">
-            <b>4. Ventilation et Emplacement des Batteries</b><br>
-            • Les batteries (surtout plomb/AGM) doivent être installées dans un local sec, tempéré et <b>correctement ventilé</b> pour évacuer les dégagements de gaz (hydrogène en fin de charge).<br>
-            • Les batteries au lithium doivent être équipées d'un BMS (Battery Management System) fonctionnel pour surveiller la température et les tensions par cellule.
+            <b>4. Local Technique & Ventilation des Batteries</b><br>
+            • Implantation des parcs de batteries dans un espace sec, tempéré et ventilé pour dissiper les calories.<br>
+            • Surveillance indispensable via un BMS actif pour les technologies lithium afin d'éviter tout emballement thermique.
         </div>
     """, unsafe_allow_html=True)
 
