@@ -9,20 +9,20 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Style CSS personnalisé pour un look "App Mobile" moderne et professionnel
+# Style CSS personnalisé pour un rendu mobile haut de gamme
 st.markdown("""
     <style>
     .main {
         background-color: #f8f9fa;
     }
-    /* Bannière d'en-tête avec image de fond */
+    /* Bannière d'en-tête immersive */
     .hero-banner {
-        background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+        background: linear-gradient(rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.82)), 
                     url('https://images.unsplash.com/photo-1509391365360-e835f377e169?q=80&w=1200&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
-        padding: 30px 15px;
-        border-radius: 15px;
+        padding: 32px 15px;
+        border-radius: 16px;
         text-align: center;
         margin-bottom: 20px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -74,23 +74,37 @@ st.markdown("""
         font-size: 14px;
         color: #1e3a8a;
     }
-    .card-eq {
+    /* Style épuré et robuste pour les cartes matériel sur mobile */
+    .tech-card {
         background-color: white;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        text-align: center;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         margin-bottom: 12px;
-        border-top: 3px solid #1d4ed8;
+        border-left: 5px solid #f97316;
+        display: flex;
+        flex-direction: column;
+    }
+    .tech-card-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 4px;
+    }
+    .tech-card-desc {
+        font-size: 12px;
+        color: #64748b;
+        margin: 0;
     }
     .news-card {
         background-color: white;
-        padding: 12px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        padding: 14px;
+        border-radius: 12px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
         margin-bottom: 12px;
-        border-left: 4px solid #f97316;
+        border-left: 5px solid #1d4ed8;
         font-size: 13px;
+        color: #334155;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -107,44 +121,30 @@ st.markdown("""
 tab0, tab1, tab2 = st.tabs(["🏠 Accueil & Actus", "⚡ Calculateur", "📜 Normes & Sécurité"])
 
 with tab0:
-    st.markdown("### 🛠️ Matériel & Équipements Professionnels")
-    st.markdown("<small>Aperçu des composants de référence pour vos projets photovoltaïques :</small>", unsafe_allow_html=True)
-
-    # Grille visuelle des équipements avec des photos professionnelles épurées
-    col_e1, col_e2 = st.columns(2)
-    with col_e1:
-        st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1592833159155-c62ff1b62490?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Modules Photovoltaïques</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Technologie monocristalline haute efficacité</p>
-            </div>
-        """, unsafe_allow_html=True)
+    st.markdown("### 🛠️ Matériel & Équipements de Référence")
+    st.markdown("<small>Composants de pointe intégrés dans vos conceptions et chiffrages :</small>", unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div class="tech-card" style="border-left-color: #1d4ed8;">
+            <div class="tech-card-title">⚡ Modules Photovoltaïques Haute Efficacité</div>
+            <div class="tech-card-desc">Panneaux monocristallins PERC et bifaciaux à haut rendement, conçus pour maximiser la production énergétique même par faible ensoleillement.</div>
+        </div>
         
-        st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Stockage Lithium Avancé</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">BMS intégré & durée de vie optimisée</p>
-            </div>
-        """, unsafe_allow_html=True)
+        <div class="tech-card" style="border-left-color: #f97316;">
+            <div class="tech-card-title">🔋 Systèmes de Stockage Lithium (LiFePO4)</div>
+            <div class="tech-card-desc">Parcs batteries nouvelle génération avec BMS intégré, garantissant une durée de vie supérieure à 6 000 cycles et une sécurité thermique optimale.</div>
+        </div>
 
-    with col_e2:
-        st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Onduleurs & Régulateurs</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Conversion haute performance & gestion de charge</p>
-            </div>
-        """, unsafe_allow_html=True)
+        <div class="tech-card" style="border-left-color: #10b981;">
+            <div class="tech-card-title">🔄 Onduleurs Hybrides & Régulateurs MPPT</div>
+            <div class="tech-card-desc">Unités de conversion intelligentes gérant en temps réel les flux entre les panneaux, le stockage, le réseau et les charges prioritaires.</div>
+        </div>
 
-        st.markdown("""
-            <div class="card-eq">
-                <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:6px; height:105px; object-fit:cover;">
-                <b style="font-size:13px; color:#1e293b;">Protections & Câblage DC</b>
-                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Coffrets de coupure et mise en conformité</p>
-            </div>
-        """, unsafe_allow_html=True)
+        <div class="tech-card" style="border-left-color: #8b5cf6;">
+            <div class="tech-card-title">🛡️ Coffrets de Protection & Câblage DC/AC</div>
+            <div class="tech-card-desc">Appareillage de coupure, interrupteurs-sectionneurs, parafoudres et câbles solaires certifiés pour la mise en conformité des installations.</div>
+        </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("### 📰 Actualités & Tendances du Photovoltaïque")
@@ -320,3 +320,4 @@ with tab2:
 
 st.markdown("---")
 st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 12px;'>SolairePro - Conçu pour les ingénieurs et installateurs terrain</p>", unsafe_allow_html=True)
+        
