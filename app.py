@@ -105,65 +105,65 @@ st.markdown("---")
 if st.button("🚀 LANCER LE DIMENSIONNEMENT TECHNIQUE"):
     
     # Calculs énergétiques
-conso_totale_wh = df["Énergie (Wh/j)"].sum()
+    conso_totale_wh = df["Énergie (Wh/j)"].sum()
     # Ajout de 20% de pertes de conversion (onduleur + câblage)
-conso_avec_pertes = conso_totale_wh * 1.20
+    conso_avec_pertes = conso_totale_wh * 1.20
 
     # Puissance continue max et puissance pic
-puissance_continue_max = (df["Puissance (W)"] * df["Quantité"]).sum()
+    puissance_continue_max = (df["Puissance (W)"] * df["Quantité"]).sum()
+    
     # Le pic max prend en compte le gros appareil qui démarre + les autres en fonctionnement continu
-max_pic_appareil = (df["Puissance Pic (W)"]).max()
-puissance_pic_totale = puissance_continue_max - df["Puissance Pic (W)"].max() + max_pic_appareil if not df.empty else 0
+    max_pic_appareil = (df["Puissance Pic (W)"]).max() if not df.empty else 0
+    puissance_pic_totale = puissance_continue_max - max_pic_appareil + max_pic_appareil if not df.empty else 0
 
     # Dimensionnement Panneaux Solaires (Wc)
-puissance_panneaux_wc = conso_avec_pertes / ensoleillement
+    puissance_panneaux_wc = conso_avec_pertes / ensoleillement
 
     # Dimensionnement Batterie (Wh puis Ah)
-capacite_batterie_wh = (conso_avec_pertes * autonomie_jours) / dod
-capacite_batterie_ah = capacite_batterie_wh / tension_systeme
+    capacite_batterie_wh = (conso_avec_pertes * autonomie_jours) / dod
+    capacite_batterie_ah = capacite_batterie_wh / tension_systeme
 
     # Affichage des résultats sous forme de rapport professionnel
-st.markdown("---")
-st.markdown("## 📊 Rapport de Dimensionnement")
+    st.markdown("---")
+    st.markdown("## 📊 Rapport de Dimensionnement")
 
     # KPIs visuels
-st.success(f"**Consommation Journalière Totale :** {conso_totale_wh:,.0f} Wh/jour *(avec pertes : {conso_avec_pertes:,.0f} Wh)*")
+    st.success(f"**Consommation Journalière Totale :** {conso_totale_wh:,.0f} Wh/jour *(avec pertes : {conso_avec_pertes:,.0f} Wh)*")
 
-col_res1, col_res2 = st.columns(2)
-with col_res1:
+    col_res1, col_res2 = st.columns(2)
+    with col_res1:
+        st.markdown(f"""
+            <div class="metric-card">
+                <h4>☀️ Panneaux Solaires</h4>
+                <h2 style='color: #d69e2e;'>{puissance_panneaux_wc:,.0f} Wc</h2>
+                <p><small>Champ photovoltaïque minimal</small></p>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with col_res2:
+        st.markdown(f"""
+            <div class="metric-card">
+                <h4>🔋 Parc Batteries</h4>
+                <h2 style='color: #3182ce;'>{capacite_batterie_ah:,.0f} Ah</h2>
+                <p><small>Sous {tension_systeme}V ({type_batterie})</small></p>
+            </div>
+        """, unsafe_allow_html=True)
+
     st.markdown(f"""
         <div class="metric-card">
-            <h4>☀️ Panneaux Solaires</h4>
-            <h2 style='color: #d69e2e;'>{puissance_panneaux_wc:,.0f} Wc</h2>
-            <p><small>Champ photovoltaïque minimal</small></p>
+            <h4>⚡ Onduleur Recommandé</h4>
+            <h2 style='color: #e53e3e;'>{puissance_pic_totale * 1.25:,.0f} VA</h2>
+            <p><small>Incluant le coefficient de sécurité pour les pics de démarrage</small></p>
         </div>
     """, unsafe_allow_html=True)
 
-with col_res2:
-    st.markdown(f"""
-        <div class="metric-card">
-            <h4>🔋 Parc Batteries</h4>
-            <h2 style='color: #3182ce;'>{capacite_batterie_ah:,.0f} Ah</h2>
-            <p><small>Sous {tension_systeme}V ({type_batterie})</small></p>
-        </div>
-    """, unsafe_allow_html=True)
-
-st.markdown(f"""
-    <div class="metric-card">
-        <h4>⚡ Onduleur Recommandé</h4>
-        <h2 style='color: #e53e3e;'>{puissance_pic_totale * 1.25:,.0f} VA</h2>
-        <p><small>Incluant le coefficient de sécurité pour les pics de démarrage</small></p>
-    </div>
-""", unsafe_allow_html=True)
-
-# Tableau récapitulatif détaillé pour le client
-st.markdown("### 📝 Détail des charges sélectionnées")
-active_df = df[df["Quantité"] > 0][["Appareil", "Puissance (W)", "Quantité", "Heures/Jour", "Énergie (Wh/j)"]]
-if not active_df.empty:
-    st.dataframe(active_df, hide_index=True)
-else:
-    st.info("Aucun appareil sélectionné.")
+    # Tableau récapitulatif détaillé pour le client
+    st.markdown("### 📝 Détail des charges sélectionnées")
+    active_df = df[df["Quantité"] > 0][["Appareil", "Puissance (W)", "Quantité", "Heures/Jour", "Énergie (Wh/j)"]]
+    if not active_df.empty:
+        st.dataframe(active_df, hide_index=True)
+    else:
+        st.info("Aucun appareil sélectionné.")
 
 st.markdown("---")
 st.markdown("<p style='text-align: center; color: #a0aec0; font-size: 12px;'>SolairePro Bénin - Conçu pour les ingénieurs et installateurs terrain</p>", unsafe_allow_html=True)
-                          
