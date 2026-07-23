@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Style CSS personnalisé pour un look "App Mobile" moderne (Bleu & Orange)
+# Style CSS personnalisé pour un look "App Mobile" moderne et visuel
 st.markdown("""
     <style>
     .main {
@@ -73,37 +73,38 @@ st.markdown('<div class="app-title">☀️ SolairePro</div>', unsafe_allow_html=
 st.markdown('<div class="app-subtitle">Dimensionnement intelligent & Conformité technique</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-# Navigation par onglets pour structurer l'application mobile
+# Navigation par onglets
 tab1, tab2 = st.tabs(["⚡ Calculateur", "📜 Normes & Sécurité"])
 
 with tab1:
-    # Étape 1 : Choix de la typologie des équipements
-    st.markdown("### 📋 Équipements électriques")
-    st.markdown("<small>Sélectionnez et ajustez les appareils à alimenter :</small>", unsafe_allow_html=True)
+    # Étape 1 : Choix de la typologie des équipements avec visuels
+    st.markdown("### 📋 Équipements électriques & Visuels")
+    st.markdown("<small>Sélectionnez et ajustez les charges à intégrer dans le dimensionnement :</small>", unsafe_allow_html=True)
 
+    # Base de données enrichie avec des émojis illustratifs puissants
     default_appliances = [
-        {"nom": "Ampoule LED", "puissance": 10, "demarrage": 1.0, "quantite": 5, "heures": 5},
-        {"nom": "Téléviseur LED", "puissance": 80, "demarrage": 1.0, "quantite": 1, "heures": 4},
-        {"nom": "Réfrigérateur / Congélateur", "puissance": 150, "demarrage": 3.0, "quantite": 1, "heures": 8},
-        {"nom": "Ventilateur", "puissance": 65, "demarrage": 1.5, "quantite": 2, "heures": 6},
-        {"nom": "Routeur Wi-Fi / Box", "puissance": 15, "demarrage": 1.0, "quantite": 1, "heures": 24},
-        {"nom": "Pompe à eau (1/2 CV)", "puissance": 375, "demarrage": 4.0, "quantite": 0, "heures": 1},
-        {"nom": "Climatiseur (1 CV)", "puissance": 1000, "demarrage": 3.5, "quantite": 0, "heures": 3},
+        {"nom": "Ampoule LED", "icone": "💡", "puissance": 10, "demarrage": 1.0, "quantite": 5, "heures": 5},
+        {"nom": "Téléviseur LED", "icone": "📺", "puissance": 80, "demarrage": 1.0, "quantite": 1, "heures": 4},
+        {"nom": "Réfrigérateur / Congélateur", "icone": "🧊", "puissance": 150, "demarrage": 3.0, "quantite": 1, "heures": 8},
+        {"nom": "Ventilateur", "icone": "🌀", "puissance": 65, "demarrage": 1.5, "quantite": 2, "heures": 6},
+        {"nom": "Routeur Wi-Fi / Box", "icone": "🛜", "puissance": 15, "demarrage": 1.0, "quantite": 1, "heures": 24},
+        {"nom": "Pompe à eau (1/2 CV)", "icone": "💧", "puissance": 375, "demarrage": 4.0, "quantite": 0, "heures": 1},
+        {"nom": "Climatiseur (1 CV)", "icone": "❄️", "puissance": 1000, "demarrage": 3.5, "quantite": 0, "heures": 3},
     ]
 
     user_data = []
     for i, item in enumerate(default_appliances):
-        with st.expander(f"🔹 {item['nom']} ({item['puissance']}W)"):
+        with st.expander(f"{item['icone']}  {item['nom']}  —  ({item['puissance']}W)"):
             col1, col2 = st.columns(2)
             with col1:
                 qte = st.number_input(f"Quantité", min_value=0, max_value=20, value=item['quantite'], key=f"qte_{i}")
-                pow_val = st.number_input(f"Puissance (W)", min_value=1, max_value=5000, value=item['puissance'], key=f"pow_{i}")
+                pow_val = st.number_input(f"Puissance unitaire (W)", min_value=1, max_value=5000, value=item['puissance'], key=f"pow_{i}")
             with col2:
-                hrs = st.number_input(f"Heures/jour", min_value=0.0, max_value=24.0, value=float(item['heures']), step=0.5, key=f"hrs_{i}")
-                dem = st.number_input(f"Facteur démarrage", min_value=1.0, max_value=6.0, value=float(item['demarrage']), step=0.1, key=f"dem_{i}")
+                hrs = st.number_input(f"Heures d'utilisation / jour", min_value=0.0, max_value=24.0, value=float(item['heures']), step=0.5, key=f"hrs_{i}")
+                dem = st.number_input(f"Facteur de démarrage", min_value=1.0, max_value=6.0, value=float(item['demarrage']), step=0.1, key=f"dem_{i}")
             
             user_data.append({
-                "Appareil": item['nom'],
+                "Appareil": f"{item['icone']} {item['nom']}",
                 "Puissance (W)": pow_val,
                 "Quantité": qte,
                 "Heures/Jour": hrs,
@@ -122,21 +123,21 @@ with tab1:
     with col_p1:
         tension_systeme = st.selectbox("Tension Système (V)", [12, 24, 48], index=2)
     with col_p2:
-        autonomie_jours = st.slider("Autonomie (jours)", min_value=1, max_value=3, value=1)
+        autonomie_jours = st.slider("Autonomie (jours sans soleil)", min_value=1, max_value=3, value=1)
 
     col_p3, col_p4 = st.columns(2)
     with col_p3:
         type_batterie = st.selectbox("Technologie Batterie", ["Lithium (DoD 80%)", "Plomb/AGM (DoD 50%)"])
         dod = 0.8 if "Lithium" in type_batterie else 0.5
     with col_p4:
-        ensoleillement = st.slider("Ensoleillement (h/j)", min_value=3.0, max_value=6.0, value=4.5, step=0.1)
+        ensoleillement = st.slider("Ensoleillement équivalent (h/j)", min_value=3.0, max_value=6.0, value=4.5, step=0.1)
 
     # Bouton de calcul principal
     st.markdown("---")
-    if st.button("🚀 LANCER LE DIMENSIONNEMENT"):
+    if st.button("🚀 LANCER LE DIMENSIONNEMENT TECHNIQUE"):
         
         conso_totale_wh = df["Énergie (Wh/j)"].sum()
-        conso_avec_pertes = conso_totale_wh * 1.20 # 20% de pertes globales
+        conso_avec_pertes = conso_totale_wh * 1.20 # 20% de pertes globales (onduleur/câbles)
 
         puissance_continue_max = (df["Puissance (W)"] * df["Quantité"]).sum()
         max_pic_appareil = (df["Puissance Pic (W)"]).max() if not df.empty else 0
@@ -155,16 +156,16 @@ with tab1:
         with col_res1:
             st.markdown(f"""
                 <div class="metric-card">
-                    <h4>☀️ Panneaux</h4>
+                    <h4>☀️ Panneaux Solaires</h4>
                     <h2 style='color: #d97706;'>{puissance_panneaux_wc:,.0f} Wc</h2>
-                    <p><small>Champ photovoltaïque</small></p>
+                    <p><small>Champ photovoltaïque minimal</small></p>
                 </div>
             """, unsafe_allow_html=True)
 
         with col_res2:
             st.markdown(f"""
                 <div class="metric-card">
-                    <h4>🔋 Batteries</h4>
+                    <h4>🔋 Parc Batteries</h4>
                     <h2 style='color: #2563eb;'>{capacite_batterie_ah:,.0f} Ah</h2>
                     <p><small>Sous {tension_systeme}V ({type_batterie.split()[0]})</small></p>
                 </div>
@@ -178,7 +179,7 @@ with tab1:
             </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("### 📝 Détail des charges")
+        st.markdown("### 📝 Détail des charges sélectionnées")
         active_df = df[df["Quantité"] > 0][["Appareil", "Puissance (W)", "Quantité", "Heures/Jour", "Énergie (Wh/j)"]]
         if not active_df.empty:
             st.dataframe(active_df, hide_index=True)
