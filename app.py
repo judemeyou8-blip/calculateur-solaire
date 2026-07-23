@@ -3,34 +3,33 @@ import pandas as pd
 
 # Configuration de la page pour un affichage optimal sur smartphone
 st.set_page_config(
-    page_title="SolairePro - Dimensionnement & Normes",
+    page_title="SolairePro - Accueil, Dimensionnement & Normes",
     page_icon="☀️",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# Style CSS personnalisé avec bannière d'en-tête immersive
+# Style CSS personnalisé pour un look "App Mobile" moderne et léché
 st.markdown("""
     <style>
     .main {
         background-color: #f8f9fa;
     }
-    /* Bannière d'en-tête avec image de fond et superposition élégante */
+    /* Bannière d'en-tête avec image de fond */
     .hero-banner {
-        background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+        background: linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.78)), 
                     url('https://images.unsplash.com/photo-1509391365360-e835f377e169?q=80&w=1200&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
-        padding: 35px 20px;
+        padding: 30px 15px;
         border-radius: 15px;
         text-align: center;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
-    /* Titre stylisé en dégradé bleu et orange éclatant sur fond sombre */
     .app-title {
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 800;
         background: linear-gradient(90deg, #60a5fa 0%, #fb923c 100%);
         -webkit-background-clip: text;
@@ -39,7 +38,7 @@ st.markdown("""
     }
     .app-subtitle {
         color: #e2e8f0;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 400;
         margin: 0;
     }
@@ -75,6 +74,24 @@ st.markdown("""
         font-size: 14px;
         color: #1e3a8a;
     }
+    .card-eq {
+        background-color: white;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        text-align: center;
+        margin-bottom: 10px;
+        border-top: 3px solid #f97316;
+    }
+    .news-card {
+        background-color: white;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        margin-bottom: 12px;
+        border-left: 4px solid #1d4ed8;
+        font-size: 13px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -82,19 +99,82 @@ st.markdown("""
 st.markdown("""
     <div class="hero-banner">
         <div class="app-title">☀️ SolairePro</div>
-        <div class="app-subtitle">Dimensionnement intelligent & Conformité technique pour installateurs</div>
+        <div class="app-subtitle">L'assistant intelligent des ingénieurs et installateurs solaires</div>
     </div>
 """, unsafe_allow_html=True)
 
-# Navigation par onglets
-tab1, tab2 = st.tabs(["⚡ Calculateur", "📜 Normes & Sécurité"])
+# Navigation par onglets élargie
+tab0, tab1, tab2 = st.tabs(["🏠 Accueil & Actus", "⚡ Calculateur", "📜 Normes & Sécurité"])
+
+with tab0:
+    st.markdown("### 🌐 Équipements Solaire 3D & Matériel Pro")
+    st.markdown("<small>Aperçu des composants de pointe utilisés pour vos installations sur le terrain :</small>", unsafe_allow_html=True)
+
+    # Grille visuelle des équipements avec de vraies images de haute qualité
+    col_e1, col_e2 = st.columns(2)
+    with col_e1:
+        st.markdown("""
+            <div class="card-eq">
+                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Panneaux Monocristallins</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Rendement élevé & Technologie PERC / Bifaciale</p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+            <div class="card-eq">
+                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Batteries Lithium LiFePO4</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Durabilité accrue, BMS intégré & haute profondeur de décharge</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with col_e2:
+        st.markdown("""
+            <div class="card-eq">
+                <img src="https://images.unsplash.com/photo-1624397640307-ebdce12484f1?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Onduleurs Hybrides / MPPT</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Gestion intelligente réseau, solaire et stockage batterie</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+            <div class="card-eq">
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=500&auto=format&fit=crop" style="width:100%; border-radius:8px; height:110px; object-fit:cover;">
+                <b style="font-size:13px; color:#1e293b;">Structure & Protections DC</b>
+                <p style="font-size:11px; color:#64748b; margin:2px 0 0 0;">Coffrets de protection, parafoudres et fixations robustes</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.markdown("### 📰 Actualités & Tendances du Photovoltaïque")
+    
+    st.markdown("""
+        <div class="news-card">
+            <b>🚀 Essor des onduleurs hybrides intelligents</b><br>
+            Les nouvelles gammes d'onduleurs intègrent des fonctionnalités de pilotage à distance via application mobile, permettant d'optimiser l'autoconsommation en temps réel et de basculer automatiquement sur le groupe électrogène ou le réseau en cas de besoin.
+        </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div class="news-card">
+            <b>🔋 Stockage Lithium : Baisse des coûts et performance</b><br>
+            La technologie Lithium-Fer-Phosphate (LiFePO4) s'impose définitivement sur le marché résidentiel et commercial grâce à sa durée de vie dépassant les 6 000 cycles et sa sécurité thermique renforcée par rapport au plomb.
+        </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div class="news-card">
+            <b>💡 Innovation dans les panneaux solaires bifaciaux</b><br>
+            L'utilisation de modules photovoltaïques captant la lumière sur les deux faces gagne du terrain dans les installations au sol et sur toitures terrasses, augmentant le rendement énergétique global de 10% à 25% selon l'albédo du site.
+        </div>
+    """, unsafe_allow_html=True)
 
 with tab1:
-    # Étape 1 : Choix de la typologie des équipements avec visuels
-    st.markdown("### 📋 Équipements électriques & Visuels")
-    st.markdown("<small>Sélectionnez et ajustez les charges à intégrer dans le dimensionnement :</small>", unsafe_allow_html=True)
+    # Étape 1 : Choix de la typologie des équipements
+    st.markdown("### 📋 Équipements électriques & Charges")
+    st.markdown("<small>Sélectionnez et ajustez les appareils à intégrer dans le dimensionnement :</small>", unsafe_allow_html=True)
 
-    # Base de données enrichie avec des émojis illustratifs
     default_appliances = [
         {"nom": "Ampoule LED", "icone": "💡", "puissance": 10, "demarrage": 1.0, "quantite": 5, "heures": 5},
         {"nom": "Téléviseur LED", "icone": "📺", "puissance": 80, "demarrage": 1.0, "quantite": 1, "heures": 4},
